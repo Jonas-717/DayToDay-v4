@@ -78,23 +78,20 @@ else:
         borda = "none"
 
         # Se existir prazo, comparar
-if prazo:
-    try:
-        # Converte apenas a hora e minuto
-        hora_prazo = datetime.strptime(prazo, "%H:%M")
+ if prazo:
+            try:
+                hora_prazo = datetime.strptime(prazo, "%H:%M")
+                diferenca_minutos = (hora_prazo - hora_atual).total_seconds() / 60
 
-        # Ajusta hora_atual para usar a mesma data fictícia (1900-01-01)
-        agora = datetime.now()
-        hora_atual = datetime.strptime(agora.strftime("%H:%M"), "%H:%M")
+                if diferenca_minutos <= 0 :
+                    cor_texto = "red"
+                    borda = "2px solid red"        # atrasada
+                elif diferenca_minutos 
+                    cor_texto = "yellow"
+                    borda = "2px solid yellow"     # perto do prazo
 
-        diferenca_minutos = (hora_prazo - hora_atual).total_seconds() / 60
-
-        if diferenca_minutos <= 0:
-            cor_texto = "red"
-            borda = "2px solid red"        # atrasada
-        elif diferenca_minutos <= 30:
-            cor_texto = "yellow"
-            borda = "2px solid yellow"     # perto do prazo
+            except:
+                pass  # caso escreva o prazo errado
         else:
             cor_texto = "green"
             borda = "2px solid green"      # dentro do prazo
@@ -166,6 +163,7 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
+
 
 
 
