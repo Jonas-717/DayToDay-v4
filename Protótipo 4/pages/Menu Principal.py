@@ -65,9 +65,6 @@ if not st.session_state.atividades:
     st.markdown("<p>Nenhuma atividade cadastrada ainda.</p>", unsafe_allow_html=True)
 
 else:
-    agora = datetime.now().strftime("%H:%M")
-    hora_atual = datetime.strptime(agora, "%H:%M")
-
     for a, atividade in enumerate(st.session_state.atividades):
 
         prazo = extrair_prazo(atividade)
@@ -77,29 +74,41 @@ else:
         cor_texto = "white"
         borda = "none"
 
-        # -------------- LÓGICA DO PRAZO (CORRIGIDA) --------------
+        # -------------- LÓGICA DO PRAZO (100% CORRIGIDA) --------------
+
         if prazo:
             try:
-                hora_prazo = datetime.strptime(prazo, "%H:%M")
-                diferenca_minutos = (hora_prazo - hora_atual).total_seconds() / 60
+                agora = datetime.now()
+
+                # Pega apenas HH:MM e aplica a data de hoje
+                hora_prazo = datetime.strptime(prazo, "%H:%M").replace(
+                    year=agora.year,
+                    month=agora.month,
+                    day=agora.day
+                )
+
+                diferenca_minutos = (hora_prazo - agora).total_seconds() / 60
 
                 if diferenca_minutos <= 0:
                     cor_texto = "red"
                     borda = "2px solid red"        # atrasada
 
-                elif 1 <= diferenca_minutos <= 60:
+                elif diferenca_minutos <= 60:
                     cor_texto = "yellow"
                     borda = "2px solid yellow"     # perto do prazo
 
-                elif diferenca_minutos > 60:
+                else:
                     cor_texto = "white"
                     borda = "none"                 # longe do prazo
 
             except:
-                pass  # caso escreva o prazo errado
+                cor_texto = "white"
+                borda = "none"
+
         else:
             cor_texto = "green"
             borda = "2px solid green"      # sem prazo
+
         # ----------------------------------------------------------
 
         # Se estiver concluída, fica verde
