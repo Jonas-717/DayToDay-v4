@@ -77,28 +77,30 @@ else:
         cor_texto = "white"
         borda = "none"
 
-        # Se existir prazo, comparar
- if prazo:
+        # -------------- LÓGICA DO PRAZO (CORRIGIDA) --------------
+        if prazo:
             try:
                 hora_prazo = datetime.strptime(prazo, "%H:%M")
                 diferenca_minutos = (hora_prazo - hora_atual).total_seconds() / 60
 
-                if diferenca_minutos <= 0 :
+                if diferenca_minutos <= 0:
                     cor_texto = "red"
                     borda = "2px solid red"        # atrasada
-                elif diferenca_minutos 
+
+                elif 1 <= diferenca_minutos <= 60:
                     cor_texto = "yellow"
                     borda = "2px solid yellow"     # perto do prazo
+
+                elif diferenca_minutos > 60:
+                    cor_texto = "white"
+                    borda = "none"                 # longe do prazo
 
             except:
                 pass  # caso escreva o prazo errado
         else:
             cor_texto = "green"
-            borda = "2px solid green"      # dentro do prazo
-
-    except ValueError:
-        pass  # caso escreva o prazo errado
-
+            borda = "2px solid green"      # sem prazo
+        # ----------------------------------------------------------
 
         # Se estiver concluída, fica verde
         if status == "Feito":
@@ -163,14 +165,3 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
-
-
-
-
-
-
-
-
-
-
-
