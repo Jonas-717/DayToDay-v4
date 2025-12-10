@@ -10,7 +10,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # LOGO.
-logo = "assets/daytoday.png"
+logo = "Protótipo 4/assets/daytoday.png"
 st.image(logo, width=200)
 
 # TÍTULO DA PÁGINA.
@@ -35,4 +35,5 @@ if st.button("Entrar"):
     else:
 
         st.write("Usuário ou senha incorretos.")
+
 
