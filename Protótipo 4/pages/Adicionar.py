@@ -68,7 +68,7 @@ if st.session_state.etapa == 1:
     st.markdown("<h3>Digite a descrição:</h3>", unsafe_allow_html=True)
     st.session_state.descricao_temp = st.text_input("Descrição", value=st.session_state.descricao_temp)
 
-    if st.button("Pronto2!"):
+    if st.button("Pronto"):
         if st.session_state.descricao_temp.strip() != "":
             st.success("Descrição adicionada!")
             st.session_state.etapa = 2
@@ -153,3 +153,4 @@ if st.session_state.etapa == 4:
     if st.button("Cancelar"):
         st.session_state.etapa = 0
         st.switch_page("pages/Menu Principal.py")
+
