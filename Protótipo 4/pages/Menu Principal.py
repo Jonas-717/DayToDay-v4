@@ -74,26 +74,21 @@ else:
         cor_texto = "white"
         borda = "none"
 
-        # -------------- LÓGICA DO PRAZO (VERSÃO FINAL FUNCIONAL) --------------
+        # -------------- LÓGICA DO PRAZO (FUNCIONANDO 100%) --------------
 
         if prazo:
             try:
-                # Hora atual sem segundos e microssegundos
-                agora = datetime.now().replace(second=0, microsecond=0)
+                # Hora atual
+                agora = datetime.now()
+                agora_minutos = agora.hour * 60 + agora.minute
 
-                # Converte o prazo HH:MM para datetime hoje
-                hora_prazo = datetime.strptime(prazo, "%H:%M").replace(
-                    year=agora.year,
-                    month=agora.month,
-                    day=agora.day,
-                    second=0,
-                    microsecond=0
-                )
+                # Hora do prazo
+                h, m = map(int, prazo.split(":"))
+                prazo_minutos = h * 60 + m
 
-                # Diferença em minutos
-                diferenca_minutos = (hora_prazo - agora).total_seconds() / 60
+                diferenca_minutos = prazo_minutos - agora_minutos
 
-                # Atrasada (prazo passou)
+                # Atrasada
                 if diferenca_minutos <= 0:
                     cor_texto = "red"
                     borda = "2px solid red"
