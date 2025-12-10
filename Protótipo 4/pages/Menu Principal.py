@@ -32,11 +32,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-<div class="blur-card">
-  <h2>Conteúdo</h2>
-  <p>Texto sobre um fundo borrado.</p>
-</div>
-
 # I M A G E M
 
 col_esq, col_dir = st.columns([2, 2])
@@ -161,5 +156,6 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
+
 
 
