@@ -83,7 +83,7 @@ else:
                 hora_prazo = datetime.strptime(prazo, "%H:%M")
                 diferenca_minutos = (hora_prazo - hora_atual).total_seconds() / 60
 
-                if diferenca_minutos == 0 :
+                if diferenca_minutos <= 0 :
                     cor_texto = "red"
                     borda = "2px solid red"        # atrasada
                 elif diferenca_minutos <= 60:
@@ -156,6 +156,7 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
+
 
 
 
