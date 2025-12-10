@@ -20,7 +20,7 @@ def marcar_como_feito(index):
     st.session_state.status_atividades[index] = "Feito"
 
 
-# F U N D O  E  E S T I L O
+# F U N D O
 
 st.markdown("""
 <style>
@@ -32,6 +32,10 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+<div class="blur-card">
+  <h2>Conteúdo</h2>
+  <p>Texto sobre um fundo borrado.</p>
+</div>
 
 # I M A G E M
 
@@ -157,4 +161,5 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
+
 
