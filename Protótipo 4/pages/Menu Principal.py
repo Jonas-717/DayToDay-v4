@@ -74,40 +74,52 @@ else:
         cor_texto = "white"
         borda = "none"
 
-        # -------------- LÓGICA DO PRAZO (100% CORRIGIDA) --------------
+        # -------------- LÓGICA DO PRAZO (VERSÃO FINAL CORRIGIDA) --------------
 
         if prazo:
             try:
-                agora = datetime.now()
+                # Hora atual sem segundos e microssegundos
+                agora = datetime.now().replace(second=0, microsecond=0)
 
-                # Pega apenas HH:MM e aplica a data de hoje
+                # Converte o prazo para datetime hoje (HH:MM)
                 hora_prazo = datetime.strptime(prazo, "%H:%M").replace(
                     year=agora.year,
                     month=agora.month,
-                    day=agora.day
+                    day=agora.day,
+                    second=0,
+                    microsecond=0
                 )
 
+                # Se o prazo for menor que agora, significa que passou da meia-noite → é do dia seguinte
+                if hora_prazo < agora:
+                    hora_prazo = hora_prazo.replace(day=hora_prazo.day + 1)
+
+                # Diferença em minutos
                 diferenca_minutos = (hora_prazo - agora).total_seconds() / 60
 
+                # Atrasada
                 if diferenca_minutos <= 0:
                     cor_texto = "red"
-                    borda = "2px solid red"        # atrasada
+                    borda = "2px solid red"
 
+                # Perto do prazo (até 60 min)
                 elif diferenca_minutos <= 60:
                     cor_texto = "yellow"
-                    borda = "2px solid yellow"     # perto do prazo
+                    borda = "2px solid yellow"
 
+                # Longe do prazo (61+ min)
                 else:
                     cor_texto = "white"
-                    borda = "none"                 # longe do prazo
+                    borda = "none"
 
             except:
                 cor_texto = "white"
                 borda = "none"
 
         else:
+            # Sem prazo
             cor_texto = "green"
-            borda = "2px solid green"      # sem prazo
+            borda = "2px solid green"
 
         # ----------------------------------------------------------
 
