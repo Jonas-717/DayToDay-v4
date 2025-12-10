@@ -74,14 +74,14 @@ else:
         cor_texto = "white"
         borda = "none"
 
-        # -------------- LÓGICA DO PRAZO (VERSÃO FINAL CORRIGIDA) --------------
+        # -------------- LÓGICA DO PRAZO (VERSÃO FINAL FUNCIONAL) --------------
 
         if prazo:
             try:
                 # Hora atual sem segundos e microssegundos
                 agora = datetime.now().replace(second=0, microsecond=0)
 
-                # Converte o prazo para datetime hoje (HH:MM)
+                # Converte o prazo HH:MM para datetime hoje
                 hora_prazo = datetime.strptime(prazo, "%H:%M").replace(
                     year=agora.year,
                     month=agora.month,
@@ -90,19 +90,15 @@ else:
                     microsecond=0
                 )
 
-                # Se o prazo for menor que agora, significa que passou da meia-noite → é do dia seguinte
-                if hora_prazo < agora:
-                    hora_prazo = hora_prazo.replace(day=hora_prazo.day + 1)
-
                 # Diferença em minutos
                 diferenca_minutos = (hora_prazo - agora).total_seconds() / 60
 
-                # Atrasada
+                # Atrasada (prazo passou)
                 if diferenca_minutos <= 0:
                     cor_texto = "red"
                     borda = "2px solid red"
 
-                # Perto do prazo (até 60 min)
+                # Perto do prazo (1 a 60 min)
                 elif diferenca_minutos <= 60:
                     cor_texto = "yellow"
                     borda = "2px solid yellow"
