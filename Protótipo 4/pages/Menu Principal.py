@@ -156,4 +156,4 @@ else:
 
 st.subheader("")
 if st.button("Sobre"):
-    st.set_page_config(page_title="Sobre o Sistema")
+    st.switch_page("Sobre")
