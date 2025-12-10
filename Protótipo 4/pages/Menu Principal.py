@@ -86,7 +86,7 @@ else:
                 if diferenca_minutos <= 0 :
                     cor_texto = "red"
                     borda = "2px solid red"        # atrasada
-                elif diferenca_minutos < 60 and > 0:
+                elif diferenca_minutos < 60 and diferenca_minutos > 0:
                     cor_texto = "yellow"
                     borda = "2px solid yellow"     # perto do prazo
 
@@ -156,6 +156,7 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
+
 
 
 
