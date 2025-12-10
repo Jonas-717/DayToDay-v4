@@ -10,7 +10,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # LOGO.
-logo = "daytoday.png"
+logo = "assets/daytoday.png"
 st.image(logo, width=200)
 
 # TÍTULO DA PÁGINA.
@@ -33,4 +33,5 @@ if st.button("Entrar"):
         # Ir para Adicionar.py
         st.switch_page("pages/Adicionar.py")
     else:
+
         st.write("Usuário ou senha incorretos.")
