@@ -52,6 +52,7 @@ def sobre_page():
         - Botão "Feito"
         - Contar tarefas pendentes
         - Menu para exibir informações
+        - Campo de prazo
     """)
 
     st.subheader("👨‍🎓 Professor responsável")
@@ -66,4 +67,5 @@ if __name__ == "__main__":
 
 
 if st.button("Voltar"):
+
     st.switch_page("pages/Menu Principal.py")
