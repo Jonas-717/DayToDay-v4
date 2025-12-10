@@ -13,7 +13,6 @@ st.markdown("""
 
 # LOGO.
 logo = "Protótipo 4/assets/daytoday.png"
-st.write("Existe?", os.path.exists(logo))
 st.image(logo, width=200)
 
 # TÍTULO.
@@ -65,6 +64,7 @@ st.write("Motivo 3 para usar o DayToDay: Personalizar suas listas e rotinas de a
 st.write("Motivo 4 para usar o DayToDay: Acompanhar seu progresso e se manter motivado diariamente.")
 
 st.write("Motivo 5 para usar o DayToDay: Acessar suas tarefas de qualquer lugar, a qualquer momento.")
+
 
 
 
