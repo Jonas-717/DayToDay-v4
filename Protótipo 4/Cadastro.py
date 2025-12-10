@@ -2,10 +2,6 @@ import streamlit as st
 import re
 import os
 
-for root, dirs, files in os.walk(".", topdown=True):
-    st.write(root, dirs, files)
-    break  # Mostra só o topo
-
 # COR DE FUNDO DA PÁGINA.
 st.markdown("""
 <style>
@@ -16,7 +12,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # LOGO.
-logo = "assets/daytoday.png"
+logo = "Protótipo 4/assets/daytoday.png"
 st.write("Existe?", os.path.exists(logo))
 st.image(logo, width=200)
 
@@ -69,6 +65,7 @@ st.write("Motivo 3 para usar o DayToDay: Personalizar suas listas e rotinas de a
 st.write("Motivo 4 para usar o DayToDay: Acompanhar seu progresso e se manter motivado diariamente.")
 
 st.write("Motivo 5 para usar o DayToDay: Acessar suas tarefas de qualquer lugar, a qualquer momento.")
+
 
 
 
