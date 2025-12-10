@@ -11,7 +11,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # LOGO.
-logo = "daytoday.png"
+logo = "assets/daytoday.png"
 st.image(logo, width=200)
 
 # TÍTULO.
@@ -61,4 +61,5 @@ st.write("Motivo 1 para usar o DayToDay: Ter sua rotina organizada de forma simp
 st.write("Motivo 2 para usar o DayToDay: Aumenta sua produtividade cumprindo tarefas no tempo certo.")
 st.write("Motivo 3 para usar o DayToDay: Personalizar suas listas e rotinas de acordo com seu estilo de vida.")
 st.write("Motivo 4 para usar o DayToDay: Acompanhar seu progresso e se manter motivado diariamente.")
+
 st.write("Motivo 5 para usar o DayToDay: Acessar suas tarefas de qualquer lugar, a qualquer momento.")
