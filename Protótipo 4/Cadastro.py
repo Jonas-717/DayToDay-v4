@@ -2,6 +2,10 @@ import streamlit as st
 import re
 import os
 
+
+st.write("Existe a pasta assets?", os.path.exists("assets"))
+st.write("Existe a imagem?", os.path.exists("assets/daytoday.png"))
+
 # COR DE FUNDO DA PÁGINA.
 st.markdown("""
 <style>
@@ -65,6 +69,11 @@ st.write("Motivo 3 para usar o DayToDay: Personalizar suas listas e rotinas de a
 st.write("Motivo 4 para usar o DayToDay: Acompanhar seu progresso e se manter motivado diariamente.")
 
 st.write("Motivo 5 para usar o DayToDay: Acessar suas tarefas de qualquer lugar, a qualquer momento.")
+
+
+st.write("Existe a pasta assets?", os.path.exists("assets"))
+st.write("Existe a imagem?", os.path.exists("assets/daytoday.png"))
+
 
 
 
