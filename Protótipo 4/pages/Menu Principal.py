@@ -37,7 +37,7 @@ st.markdown("""
 
 col_esq, col_dir = st.columns([2, 2])
 with col_dir:
-    st.image("assets/daytoday.png", width=500)
+    st.image("Protótipo 4/assets/daytoday.png", width=500)
 
 
 # T Í T U L O
@@ -157,5 +157,6 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/sobre.py")
+
 
 
