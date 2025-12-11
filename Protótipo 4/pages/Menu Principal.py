@@ -38,10 +38,7 @@ st.markdown("<h1>⬇️ ATIVIDADES ⬇️</h1>", unsafe_allow_html=True)
 
 # P R A Z O
 def extrair_prazo(texto):
-    """
-    Extrai um horário no formato HH:MM de textos como:
-    'Treinar • Prazo: 14:30'
-    """
+
     try:
         partes = texto.split("•")
         for p in partes:
@@ -153,3 +150,4 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
+
