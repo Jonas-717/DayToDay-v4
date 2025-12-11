@@ -14,6 +14,7 @@ if "nome_cliente" not in st.session_state:
 # FUNÇÃO DO BOTÃO
 def marcar_como_feito(index):
     st.session_state.status_atividades[index] = "Feito"
+    st.rerun()
 
 # F U N D O
 st.markdown("""
@@ -114,7 +115,6 @@ else:
         with col2:
             if st.button("✅", key=f"btn_{idx}"):
                 marcar_como_feito(idx)
-                st.experimental_rerun()
 
 # N A V E G A Ç Ã O
 st.subheader("")
