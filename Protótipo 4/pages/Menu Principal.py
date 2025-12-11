@@ -11,7 +11,7 @@ if "status_atividades" not in st.session_state:
 if "nome_cliente" not in st.session_state:
     st.session_state.nome_cliente = "Usuário"
 
-# F U N Ç Ã O   D O   B O T Ã O
+# FUNÇÃO DO BOTÃO
 def marcar_como_feito(index):
     st.session_state.status_atividades[index] = "Feito"
 
@@ -37,14 +37,19 @@ st.markdown("<h1>⬇️ ATIVIDADES ⬇️</h1>", unsafe_allow_html=True)
 
 # P R A Z O
 def extrair_prazo(texto):
+    """
+    Extrai um horário no formato HH:MM de textos como:
+    'Treinar • Prazo: 14:30'
+    """
     try:
         partes = texto.split("•")
         for p in partes:
-            p = p.strip()
-            if p.lower().startswith("prazo:"):
-                return p.replace("Prazo:", "").replace("prazo:", "").strip()
+            p = p.strip().lower()
+            if p.startswith("prazo:"):
+                hora = p.replace("prazo:", "").strip()
+                return hora
     except:
-        return None
+        pass
     return None
 
 # E X I B I R    A T I V I D A D E S
@@ -52,64 +57,64 @@ if not st.session_state.atividades:
     st.markdown("<p>Nenhuma atividade cadastrada ainda.</p>", unsafe_allow_html=True)
 else:
     for idx, (atividade, status) in enumerate(zip(st.session_state.atividades, st.session_state.status_atividades)):
-        prazo = extrair_prazo(atividade)
 
-        # Cor padrão
+        # C O R   P E L O   P R A Z O
         cor_texto = "white"
         borda = "none"
 
-        # LÓGICA DO PRAZO SEGURA
+        prazo = extrair_prazo(atividade)
+
         if prazo:
             try:
                 h, m = map(int, prazo.split(":"))
                 if not (0 <= h <= 23 and 0 <= m <= 59):
-                    raise ValueError("Hora inválida")
+                    raise ValueError("Horário inválido")
 
                 agora = datetime.now()
-                agora_minutos = agora.hour * 60 + agora.minute
-                prazo_minutos = h * 60 + m
-                diferenca_minutos = prazo_minutos - agora_minutos
+                agora_min = agora.hour * 60 + agora.minute
+                prazo_min = h * 60 + m
+                diferenca = prazo_min - agora_min
 
-                if diferenca_minutos <= 0:
+                if diferenca <= 0:
                     cor_texto = "red"
                     borda = "2px solid red"
-                elif diferenca_minutos <= 60:
+
+                elif diferenca <= 60:
                     cor_texto = "yellow"
                     borda = "2px solid yellow"
+
                 else:
                     cor_texto = "white"
                     borda = "none"
 
             except:
-                # Prazo inválido → mantém padrão
                 cor_texto = "white"
                 borda = "none"
-        else:
-            # Sem prazo → cor neutra
-            cor_texto = "white"
-            borda = "none"
 
         # Se estiver concluída, fica verde
         if status == "Feito":
             cor_texto = "lightgreen"
             borda = "2px solid lightgreen"
 
-        # Exibição com botão ✅
+        # Exibição
         col1, col2 = st.columns([8, 1])
+
         with col1:
             st.markdown(
                 f"""
                 <div style="border:{borda}; padding:10px; border-radius:10px; margin-bottom:5px;">
-                    <h3 style='color:{cor_texto}; margin:0;'>{idx+1} - {atividade} ({status})</h3>
+                    <h3 style='color:{cor_texto}; margin:0;'>
+                        {idx+1} - {atividade} ({status})
+                    </h3>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
+
         with col2:
-            if status != "Feito":
-                if st.button("✅", key=f"btn_{idx}"):
-                    marcar_como_feito(idx)
-                    st.experimental_rerun()
+            if st.button("✅", key=f"btn_{idx}"):
+                marcar_como_feito(idx)
+                st.experimental_rerun()
 
 # N A V E G A Ç Ã O
 st.subheader("")
