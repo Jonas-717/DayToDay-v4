@@ -51,9 +51,8 @@ def extrair_prazo(texto):
 if not st.session_state.atividades:
     st.markdown("<p>Nenhuma atividade cadastrada ainda.</p>", unsafe_allow_html=True)
 else:
-    for a, atividade in enumerate(st.session_state.atividades):
+    for idx, (atividade, status) in enumerate(zip(st.session_state.atividades, st.session_state.status_atividades)):
         prazo = extrair_prazo(atividade)
-        status = st.session_state.status_atividades[a]
 
         # Cor padrão
         cor_texto = "white"
@@ -82,30 +81,30 @@ else:
                     borda = "none"
 
             except:
+                # Prazo inválido → mantém padrão
                 cor_texto = "white"
                 borda = "none"
         else:
-            cor_texto = "green"
-            borda = "2px solid green"
+            # Sem prazo → cor neutra
+            cor_texto = "white"
+            borda = "none"
 
         # Se estiver concluída, fica verde
         if status == "Feito":
             cor_texto = "lightgreen"
             borda = "2px solid lightgreen"
 
-        col1, col2 = st.columns([8, 1])
-        with col1:
-            st.markdown(
-                f"""
-                <div style="border:{borda}; padding:10px; border-radius:10px;">
-                    <h3 style='color:{cor_texto}; margin:0;'>
-                        {a+1} - {atividade} ({status})
-                    </h3>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
+        # Exibição
+        st.markdown(
+            f"""
+            <div style="border:{borda}; padding:10px; border-radius:10px; margin-bottom:5px;">
+                <h3 style='color:{cor_texto}; margin:0;'>
+                    {idx+1} - {atividade} ({status})
+                </h3>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
         with col2:
             if st.button("✅", key=f"btn_{a}"):
                 marcar_como_feito(a)
@@ -144,4 +143,5 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
+
 
