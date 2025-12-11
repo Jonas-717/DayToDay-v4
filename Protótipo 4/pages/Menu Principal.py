@@ -56,7 +56,7 @@ if not st.session_state.atividades:
 else:
     for idx, (atividade, status) in enumerate(zip(st.session_state.atividades, st.session_state.status_atividades)):
 
-        # C O R   P E L O   P R A Z O  (CORRIGIDO)
+        # C O R   P E L O   P R A Z O 
         cor_texto = "white"
         borda = "none"
 
@@ -150,4 +150,5 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
+
 
