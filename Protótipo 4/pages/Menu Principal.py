@@ -59,7 +59,7 @@ if not st.session_state.atividades:
 else:
     for idx, (atividade, status) in enumerate(zip(st.session_state.atividades, st.session_state.status_atividades)):
 
-        # C O R   P E L O   P R A Z O
+        # C O R   P E L O   P R A Z O  (CORRIGIDO)
         cor_texto = "white"
         borda = "none"
 
@@ -71,11 +71,15 @@ else:
                 if not (0 <= h <= 23 and 0 <= m <= 59):
                     raise ValueError("Horário inválido")
 
-                agora = datetime.now()
+                # Hora local correta do Brasil
+                import pytz
+                agora = datetime.now(pytz.timezone("America/Sao_Paulo"))
+
                 agora_min = agora.hour * 60 + agora.minute
                 prazo_min = h * 60 + m
                 diferenca = prazo_min - agora_min
 
+                # Lógica corrigida
                 if diferenca <= 0:
                     cor_texto = "red"
                     borda = "2px solid red"
