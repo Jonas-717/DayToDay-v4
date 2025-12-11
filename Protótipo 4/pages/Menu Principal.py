@@ -11,7 +11,7 @@ if "status_atividades" not in st.session_state:
 if "nome_cliente" not in st.session_state:
     st.session_state.nome_cliente = "Usuário"
 
-# FUNÇÃO DO BOTÃO
+# F U N Ç Ã O   D O   B O T Ã O
 def marcar_como_feito(index):
     st.session_state.status_atividades[index] = "Feito"
 
@@ -94,21 +94,22 @@ else:
             cor_texto = "lightgreen"
             borda = "2px solid lightgreen"
 
-        # Exibição
-        st.markdown(
-            f"""
-            <div style="border:{borda}; padding:10px; border-radius:10px; margin-bottom:5px;">
-                <h3 style='color:{cor_texto}; margin:0;'>
-                    {idx+1} - {atividade} ({status})
-                </h3>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        # Exibição com botão ✅
+        col1, col2 = st.columns([8, 1])
+        with col1:
+            st.markdown(
+                f"""
+                <div style="border:{borda}; padding:10px; border-radius:10px; margin-bottom:5px;">
+                    <h3 style='color:{cor_texto}; margin:0;'>{idx+1} - {atividade} ({status})</h3>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
         with col2:
-            if st.button("✅", key=f"btn_{a}"):
-                marcar_como_feito(a)
-                st.experimental_rerun()
+            if status != "Feito":
+                if st.button("✅", key=f"btn_{idx}"):
+                    marcar_como_feito(idx)
+                    st.experimental_rerun()
 
 # N A V E G A Ç Ã O
 st.subheader("")
@@ -143,4 +144,3 @@ else:
 st.subheader("")
 if st.button("Sobre"):
     st.switch_page("pages/Sobre.py")
-
